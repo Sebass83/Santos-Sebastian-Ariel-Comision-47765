@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+<section class="container-form">
+    <form action="{% url 'crearBlog' %}" method="post">
+         {% csrf_token %}
+        <label>
+            Titulo:
+        </label>
+            <input type="text" name="title" maxlength="200">
+        <label >Subtitulo:
+        </label>
+            <input type="text" name="subtitle" maxlength="100">
+        <label>
+            Descripción:
+        </label>
+            <input type="text" name="description" maxlength="400">
+        <button type="submit">Enviar</button>
+        
+    </form>
+</section>
+{% endblock %}

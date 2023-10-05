@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+<section class="container-form">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>Registrarme: </h2>
+        {{ form.as_p }}
+        <button type="submit">Registrase!</button>
+        </form>
+</section>
+{% endblock %}
