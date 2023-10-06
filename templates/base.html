@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
 
+    <link rel="icon" type="image/x-icon" href="{% static './img/favicon.ico' %}">
     <!-- Material Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Scripts -->
@@ -36,7 +37,12 @@
           <li class="menu-usuario">
             <a href="{% url 'EditarPerfil' %}">⚙</a>
             <div>{{user.username}}</div>
+            {% if avatar %}
+            <img src="{{avatar}}" alt="" />
+            {% else %}
             <img src="{% static 'img/default-avatar.jpg' %}" alt="" />
+            {% endif %}
+          
           </li>
           {% else %}
           <li><a href="{% url 'Registrame' %}">Registrarme</a></li>

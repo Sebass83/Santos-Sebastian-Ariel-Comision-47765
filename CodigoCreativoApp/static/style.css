@@ -109,7 +109,7 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+  box-sizing: border-box;
 }
 body {
   font-family: "Roboto", sans-serif;
@@ -337,6 +337,7 @@ footer {
 }
 
 .container-form{
+  box-sizing: border-box;
   width: 99vw;
   height: calc(100vh - 5.2rem);
   display: grid;
@@ -345,7 +346,9 @@ footer {
   background-color: var(--text-dark);
 }
 .container-form form{
-  width: clamp(350px, 70vw ,100vw);
+  box-sizing: border-box;
+  width: clamp(350px,50vw,430px);
+
   gap: 1rem;
   display:flex;
   flex-direction: column;
