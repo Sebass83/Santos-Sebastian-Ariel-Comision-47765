@@ -1,21 +1,24 @@
-{% extends "base.html" %} {% load static %} {% block main %}
-
-{% if Mensaje %}
+{% extends "base.html" %} {% load static %} {% block main %} {% if Mensaje %}
 <div class="posts-list">
-    <p>{{Mensaje}}</p>
+  <p>{{Mensaje}}</p>
 </div>
 
-{% endif %}
-{% if data %}
+{% endif %} {% if data %}
 <div class="posts-list">
-{% for post in data %}
-<div class="post-item">
-<p>{{post.title}} </p><button class="primary">Editar</button> <button class="secondary">Eliminar</button>
-</div>
-{% endfor %}
+  {% for post in data %}
+  <div class="post-item">
+    <div class="resumen">
+      <img src="{{post.imagen.url}}" alt="" />
+      <h1>{{post.title}}</h1>
+    </div>
+    <div class="action">
+      <a href="" class="primary">Editar</a>
+      <a href="" class="secondary">Eliminar</a>
+      <a href="{% url 'getPost' id=post.id %}" class="ver">Ver</a>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 {% else %}
 <p>Sin post</p>
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}
