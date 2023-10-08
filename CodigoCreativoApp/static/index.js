@@ -1,5 +1,4 @@
 const menu = document.querySelector('.material-symbols-outlined')
-
 const message = document.querySelector('.error-message')
 
 if(message){
@@ -19,3 +18,9 @@ menu.addEventListener('click', (e) => {
         ul.classList.add("visible")
     }
 })
+
+if(document.URL.includes("/auth/logout/")){
+    setTimeout(() =>{
+        window.location.replace(document.location.origin);
+    },'3000')
+}
