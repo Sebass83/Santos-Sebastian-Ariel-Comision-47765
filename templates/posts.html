@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% load static %} {% block main %} 
+{% if data|length == 0 %}
+<section class="sin-post">
+  <div>
+    <p>No hay post para mostrar</p>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'crearBlog' %}" class="btn">Crear post</a>
+    {% else %}
+    <a href="{% url 'Registrame' %}" class="btn">Registrarse</a>
+    <a href="{% url 'Login' %}" class="btn">Iniciar Sesión</a>
+    {% endif %}
+  </div>
+</section>
+{% endif%}
+<section class="notas-secundarias">
+  {% for post in data %}
+
+  <div class="card">
+    <img src="{{post.imagen.url}}" alt="" />
+    <h2>{{post.title}}</h2>
+    <span>Autor: {{post.author}} - Fecha: {{post.entryDate}}</span>
+    <p>{{post.description}}</p>
+    <footer>
+      <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
+      <a href="#" class="btn">✉ Contactar al autor</a>
+    </footer>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -31,12 +31,15 @@
         <ul>
           <li><a href="{% url 'inicio' %}">inicio</a></li>
           <li><a href="">Acerca de mi</a></li>
-          <li><a href="">Blogs</a></li>
+          <li><a href="{% url 'allPosts' %}">Blogs</a></li>
           {% if user.is_authenticated %}
+          <li><a href="{% url 'crearBlog' %}">Crear post</a></li>
+          <li><a href="{% url 'misPosts' %}">Mis Post</a></li>
           <li><a href="{% url 'Logout' %}">Salir</a></li>
           <li class="menu-usuario">
             <a href="{% url 'EditarPerfil' %}">⚙</a>
             <div>{{user.username}}</div>
+            
             {% if avatar %}
             <img src="{{avatar}}" alt="" />
             {% else %}
@@ -62,7 +65,12 @@
     <!-- Main -->
 
     <!-- Footer-->
-    <footer></footer>
+    <footer>
+      <div>
+
+      </div>
+      <div>{Código Creativo}</div>
+    </footer>
     <!-- Footer-->
   </body>
 </html>

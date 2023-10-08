@@ -1,8 +1,18 @@
 {% extends "base.html" %} {% load static %} {% block main %}
+
 <section class="container-form">
-    <form action="{% url 'crearBlog' %}" method="post">
+    <h1>Crear Post</h1>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <form action="{% url 'crearBlog' %}" method="post" enctype="multipart/form-data">
          {% csrf_token %}
-        <label>
+
+         {{ forms.as_p }}
+         {{ forms.media }}
+
+
+        <!-- <label>
             Titulo:
         </label>
             <input type="text" name="title" maxlength="200">
@@ -12,7 +22,7 @@
         <label>
             Descripción:
         </label>
-            <input type="text" name="description" maxlength="400">
+            <input type="text" name="description" maxlength="400"> -->
         <button type="submit">Enviar</button>
         
     </form>

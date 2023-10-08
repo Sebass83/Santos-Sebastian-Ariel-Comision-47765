@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+
+{% if Mensaje %}
+<div class="posts-list">
+    <p>{{Mensaje}}</p>
+</div>
+
+{% endif %}
+{% if data %}
+<div class="posts-list">
+{% for post in data %}
+<div class="post-item">
+<p>{{post.title}} </p><button class="primary">Editar</button> <button class="secondary">Eliminar</button>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<p>Sin post</p>
+{% endif %}
+
+{% endblock %}

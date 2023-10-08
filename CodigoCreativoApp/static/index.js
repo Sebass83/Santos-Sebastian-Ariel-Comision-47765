@@ -1,4 +1,14 @@
 const menu = document.querySelector('.material-symbols-outlined')
+
+const message = document.querySelector('.error-message')
+
+if(message){
+    setTimeout(() =>{
+        message.remove();
+    },'2900')
+
+}
+
 const ul = document.querySelector('nav ul')
 menu.addEventListener('click', (e) => {
     if (e.target.innerHTML == "close"){

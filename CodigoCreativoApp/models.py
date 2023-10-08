@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -21,6 +22,19 @@ class Blog(models.Model):
     description = models.CharField(max_length=400)
     entryDate = models.DateField(auto_now_add=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,default=None) 
+    imagen = models.ImageField(upload_to='post-image',default=None)
+    body =  RichTextField(default=None)
+
+class Mensajes(models.Model):
+    de =  models.CharField(max_length=150)
+    para = models.CharField(max_length=150)
+    asunto = models.CharField(max_length=150)
+    body =  RichTextField(default=None)
+    leido = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'de: {self.de} - para: {self.para} - asunto: {self.asunto}'
+
     
 
 

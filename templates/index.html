@@ -1,67 +1,63 @@
-{% extends "base.html" %} {% load static %} {% block main %} {% if error%}
-{{error }} {% else %} 
+{% extends "base.html" %} {% load static %} {% block main %} 
+{% if error or message %}
+<div class="error-message">
+    {% if error %}
+      <div class="error">este es un error</div>
+    {% endif %}
+    {% if message %}
+      <div class="message">{{message}}</div>
+    {% endif %}
+</div>
+{% endif %}
 
-{% if data|length  == 0 %}
+
+{% if data|length == 0 %}
 <section class="sin-post">
   <div>
-  <p>No hay post para mostrar</p>
+    <p>No hay post para mostrar</p>
 
-  {% if user.is_authenticated %}
-  <a href="{% url 'crearBlog' %}" class="btn">Crear post</a>
-  {% else %}
-  <a href="{% url 'Registrame' %}" class="btn">Registrarse</a>
-  <a href="{% url 'Login' %}" class="btn">Iniciar Sesión</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'crearBlog' %}" class="btn">Crear post</a>
+    {% else %}
+    <a href="{% url 'Registrame' %}" class="btn">Registrarse</a>
+    <a href="{% url 'Login' %}" class="btn">Iniciar Sesión</a>
 
-  {% endif %}
-
-</div>
-
+    {% endif %}
+  </div>
 </section>
-{% endif%}
-{% for post in data %} {% if forloop.counter == 1 %}
+{% endif%} {% for post in data %} {% if forloop.counter == 1 %}
 
 <section class="nota-principal">
   <div class="nota-principal-hero">
-    <img
-      src="https://www.ripplesnigeria.com/wp-content/uploads/2023/04/Resizer_16767179965851.jpeg"
-      alt="hero"
-    />
+    <img src="{{post.imagen.url}}" alt="hero" />
   </div>
   <div class="nota-principal-contenido-gradient"></div>
   <div class="nota-principal-contenido">
-    <h2>Titulo De la nota</h2>
-    <h3>Subtitulo</h3>
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo nemo
-      perspiciatis nobis repellendus doloremque magnam quas consectetur eum
-      atque dolores amet commodi fuga nesciunt deleniti ad, ratione facilis sit
-      itaque!
-    </p>
-    <a href="#" class="btn">Leer mas</a>
+    <h2>{{post.title}}</h2>
+    <h3>{{post.subtitle}}</h3>
+    <span>Autor: {{post.author}} - Fecha: {{post.entryDate}}</span>
+    <p>{{post.description}}</p>
+    <footer>
+      <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
+      <a href="#" class="btn">✉ Contactar al autor</a>
+    </footer>
   </div>
 </section>
 
-{% endif%} {% endfor %}
-
-
- {% if data|length  >= 4 %}
+{% endif%} {% endfor %} {% if data|length > 1 %}
 <section class="notas-secundarias">
-  {% for post in data %} 
-  {% if forloop.counter >= 1 and forloop.counter <= 4 %}
+  {% for post in data %} {% if forloop.counter > 1 and forloop.counter <= 9 %}
   <div class="card">
-    <img
-      src="https://www.ripplesnigeria.com/wp-content/uploads/2023/04/Resizer_16767179965851.jpeg"
-      alt=""
-    />
-    <h2>Titulo</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
-      consequuntur possimus necessitatibus culpa! Beatae, enim doloribus ratione
-      quibusdam debitis tempora temporibus earum doloremque deleniti quod quia
-      adipisci hic, labore quis?
-    </p>
-    <a href="#" class="btn">Leer mas</a>
+    <img src="{{post.imagen.url}}" alt="" />
+    <h2>{{post.title}}</h2>
+    <span>Autor: {{post.author}} - Fecha: {{post.entryDate}}</span>
+    <p>{{post.description}}</p>
+    <footer>
+      <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
+      <a href="#" class="btn">✉ Contactar al autor</a>
+    </footer>
+  
   </div>
   {% endif %} {% endfor %}
 </section>
-{% endif %} {% endif %} {% endblock %}
+{% endif %}  {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+
+{% if error %}
+<p>{{error}}</p>
+
+{% endif %}
+{% for post in data %}
+<article class="individual-post">
+
+<img src={{post.imagen.url}} width= "100%"alt={{ post.title }}>
+<header>
+<h2>{{ post.title }}</h2>
+<h3>{{ post.subtitle }}</h3>
+<div class="data">
+<aside><strong>Autor: </strong>{{post.author}} - <strong>Fecha de publicación: </strong>{{post.entryDate}}</aside>
+</div>
+<p>{{post.description}}</p>
+</header>
+<hr>
+
+<main>
+    {{post.body| safe | linebreaksbr}}
+</main>
+</article>
+
+{% endfor %}
+
+{% endblock %}

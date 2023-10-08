@@ -15,11 +15,16 @@
 ```
 python -m pip install Pillow
 ```
-2. Realizar las migraciones:
+2. instalar ckeditor
+```
+pip install django-ckeditor
+```
+
+3. Realizar las migraciones:
 ```
 python manage.py makemigrations
 ```
-3. Migrar la Base de datos:
+4. Migrar la Base de datos:
 ```
 python manage.py migrate
 ```
