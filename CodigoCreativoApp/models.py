@@ -22,7 +22,7 @@ class Blog(models.Model):
     description = models.CharField(max_length=400)
     entryDate = models.DateField(auto_now_add=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE,default=None) 
-    imagen = models.ImageField(upload_to='post-image',default=None)
+    imagen = models.ImageField(upload_to='post_image',default=None)
     body =  RichTextField(default=None)
 
 class Mensajes(models.Model):

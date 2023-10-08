@@ -39,7 +39,9 @@
     <p>{{post.description}}</p>
     <footer>
       <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
+      {% if user.is_authenticated %}
       <a href="#" class="btn">✉ Contactar al autor</a>
+      {% endif %}
     </footer>
   </div>
 </section>
@@ -54,7 +56,9 @@
     <p>{{post.description}}</p>
     <footer>
       <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
+      {% if user.is_authenticated %}
       <a href="#" class="btn">✉ Contactar al autor</a>
+      {% endif %}
     </footer>
   
   </div>
