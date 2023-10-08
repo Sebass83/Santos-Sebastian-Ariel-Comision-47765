@@ -94,25 +94,36 @@ def misPosts(request):
 def getPost(request, id):
     data = Blog.objects.filter(id=id)
     avatar = Avatar.objects.filter(user=request.user.id)
+    authorAvatar = Avatar.objects.filter(user= data[0].author.id)
+    
 
-    print(data[0].imagen.url)
+    
 
     if request.method == "GET":
         if data:
+            if authorAvatar:    
+                if avatar:
+                    return render(
+                        request, "post.html", {"data": data, "avatar": avatar[0].imagen.url, 'authorAvatar': authorAvatar[0].imagen.url}
+                    )
+                return render(request, "post.html", {"data": data, 'authorAvatar': authorAvatar[0].imagen.url})
             if avatar:
-                return render(
-                    request, "post.html", {"data": data, "avatar": avatar[0].imagen.url}
-                )
+                    return render(
+                        request, "post.html", {"data": data, "avatar": avatar[0].imagen.url}
+                    )
             return render(request, "post.html", {"data": data})
+
         else:
             return render(
-                request, "post.html", {"error": f"No se encontro post con el id: {id}"}
+                request, "post.html", {"error": f"No se encontró post con el id: {id}"}
             )
 
 
 def allPosts(request):
     data = Blog.objects.all()
     avatar = Avatar.objects.filter(user=request.user.id)
+
+    
     if avatar:
         return render(
             request, "posts.html", {"data": data, "avatar": avatar[0].imagen.url}

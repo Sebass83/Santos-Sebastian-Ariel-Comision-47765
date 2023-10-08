@@ -450,6 +450,7 @@ footer {
   margin-bottom: 1rem;
 }
 .individual-post header .data {
+ 
   border-left: 0.5rem solid var(--text-mid);
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -460,9 +461,16 @@ footer {
   color: var(--text-mid);
 }
 .individual-post aside {
+  gap: .5rem;
+  display: flex;
+  align-items: center;
   font-size: small;
   color: var(--text-mid);
 }
+.individual-post aside img {
+margin-right: .5rem;
+}
+
 
 .individual-post aside strong {
   gap: 1rem;

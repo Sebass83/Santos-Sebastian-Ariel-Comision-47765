@@ -12,7 +12,11 @@
 <h2>{{ post.title }}</h2>
 <h3>{{ post.subtitle }}</h3>
 <div class="data">
-<aside><strong>Autor: </strong>{{post.author}} - <strong>Fecha de publicación: </strong>{{post.entryDate}}</aside>
+<aside>
+    {% if authorAvatar %}
+            <img src={{authorAvatar}} alt={{post.author.username}} width="30px" style="border-radius: 100%" />
+    {% endif %}
+    <strong>Autor: </strong>{{post.author}} - <strong>Fecha de publicación: </strong>{{post.entryDate}}</aside>
 </div>
 <p>{{post.description}}</p>
 </header>
