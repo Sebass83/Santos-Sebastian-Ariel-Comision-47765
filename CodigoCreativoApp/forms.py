@@ -1,5 +1,5 @@
 from django import forms
-from CodigoCreativoApp.models import Blog
+from CodigoCreativoApp.models import Avatar, Blog
 from ckeditor.widgets import CKEditorWidget
 
 class CrearPost(forms.Form):
@@ -22,4 +22,13 @@ class EditPost(forms.Form):
         model = Blog
         fields = ['title','subtitle','description','body']
         exclude = ['entryDate','author','imagen']
+
+class SetAvatar(forms.Form):
+    imagen = forms.ImageField()
+    
+    class Meta:
+        model = Avatar
+        fields = ['imagen']
+        exclude = ['user']
+
 

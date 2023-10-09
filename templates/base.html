@@ -49,12 +49,16 @@
           <li class="menu-usuario">
             <a href="{% url 'EditarPerfil' %}">⚙</a>
             <div>{{user.username}}</div>
-            
-            {% if avatar %}
-            <img src="{{avatar}}" alt="" />
-            {% else %}
-            <img src="{% static 'img/default-avatar.jpg' %}" alt="" />
-            {% endif %}
+
+            {% with avatar=user.avatar_set.first %}
+              {% if avatar %}
+                <img src="{{avatar.imagen.url}}" alt="" />
+
+              {% else %}
+                <img class="editable" src="{% static 'img/default-avatar.jpg' %}" alt="" />
+              {% endif %}
+            {% endwith %}
+           
           
           </li>
           {% else %}

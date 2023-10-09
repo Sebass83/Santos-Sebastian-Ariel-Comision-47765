@@ -184,6 +184,15 @@ p {
   height: 0;
   visibility: hidden;
 }
+.editable{
+  border: 2px solid var(--green-dark);
+  transition: var(--transition);
+
+}
+.editable:hover{
+  border: 2px solid var(--green-light);
+  
+}
 nav {
   align-content: center;
   width: 99vw;
@@ -367,7 +376,7 @@ footer {
   padding: 1rem;
   box-sizing: border-box;
   width: 99vw;
-  height: auto;
+  min-height: calc(100vh - 5.2rem);;
   display: grid;
   align-items: center;
   justify-content: center;

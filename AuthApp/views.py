@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from CodigoCreativoApp.models import Avatar
 
 from AuthApp.form import UserEditForm
@@ -55,33 +55,19 @@ def register(request):
 @login_required
 def editarPerfil(request):
     usuario = request.user
-    avatar = Avatar.objects.filter(user=request.user.id)
 
     if request.method == "POST":
         miFormulario = UserEditForm(request.POST)
 
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-
             usuario.email = informacion["email"]
             usuario.password1 = informacion["password1"]
             usuario.password2 = informacion["password2"]
             usuario.last_name = informacion["last_name"]
             usuario.first_name = informacion["first_name"]
-
             usuario.save()
-
             return render(request, "logout.html")
-
     else:
         miFormulario = UserEditForm(initial={"email": usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
-
-
-
-    if avatar:
-        return render(request, 'editarPerfil.html', {"avatar":avatar[0].imagen.url,"miformulario": miFormulario, "usuario": usuario})  
-    return render(
-        request,
-        "editarPerfil.html",
-        {"miformulario": miFormulario, "usuario": usuario},
-    )
+    return render(request,"editarPerfil.html",{"miformulario": miFormulario, "usuario": usuario})

@@ -8,4 +8,5 @@ urlpatterns = [
     path("editar-post/<int:id>", editarPost , name="editarPost"),
     path("post/<int:id>", getPost , name="getPost"),
     path("blogs/", allPosts, name="allPosts"),
+    path('set-avatar/', setAvatar, name="setAvatar")
 ]

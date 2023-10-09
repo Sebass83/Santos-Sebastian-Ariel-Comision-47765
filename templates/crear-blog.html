@@ -1,12 +1,9 @@
 {% extends "base.html" %} {% load static %} {% block main %}
 
 <section class="container-form">
-    <h1>Crear Post</h1>
-    {% if error %}
-    {{ error }}
-    {% endif %}
     <form action="{% url 'crearBlog' %}" method="post" enctype="multipart/form-data">
          {% csrf_token %}
+         <h1>Crear Post</h1>
 
          {{ forms.as_p }}
          {{ forms.media }}

@@ -11,6 +11,8 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.imagen}"
+    
+
 
 class Blog(models.Model):
 
