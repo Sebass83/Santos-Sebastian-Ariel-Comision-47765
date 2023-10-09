@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% load static %} {% block main %} 
+
+
+<section class="container-form">
+  {% if error %}
+  <h1 style="color: red">No tienes los permisos para editar este Post</h1>
+  {% else %}
+
+  <form action="{% url 'editarPost' id=id %}" method="post">
+    {% csrf_token %}
+    <h2>Editar Post</h2>
+
+    {{ forms.as_p }} {{ forms.media }}
+    <button type="submit">Editar</button>
+  </form>
+  {% endif %}
+</section>
+
+{% endblock %}

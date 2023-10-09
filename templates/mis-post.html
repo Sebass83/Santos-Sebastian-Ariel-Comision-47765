@@ -1,9 +1,7 @@
-{% extends "base.html" %} {% load static %} {% block main %} {% if Mensaje %}
-<div class="posts-list">
-  <p>{{Mensaje}}</p>
-</div>
+{% extends "base.html" %} {% load static %} {% block main %} 
 
-{% endif %} {% if data %}
+
+{% if data %}
 <div class="posts-list">
   {% for post in data %}
   <div class="post-item">
@@ -12,7 +10,7 @@
       <h1>{{post.title}}</h1>
     </div>
     <div class="action">
-      <a href="" class="primary">Editar</a>
+      <a href="{% url 'editarPost' id=post.id %}" class="primary">Editar</a>
       <a href="" class="secondary">Eliminar</a>
       <a href="{% url 'getPost' id=post.id %}" class="ver">Ver</a>
     </div>

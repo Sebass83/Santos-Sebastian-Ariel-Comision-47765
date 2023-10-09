@@ -513,6 +513,7 @@ margin-right: .5rem;
   background-color: hsl(0, 100%, 91%);
   color: hsl(0, 32%, 46%);
   min-width: 350px;
+  animation: fadeOut 3s linear;
 }
 .message {
   border-radius: var(--br);

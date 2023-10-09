@@ -12,3 +12,14 @@ class CrearPost(forms.Form):
         model = Blog
         fields = ['title','subtitle','description','imagen','body']
         exclude = ['entryDate','author']
+
+class EditPost(forms.Form):
+    title = forms.CharField()
+    subtitle = forms.CharField()
+    description = forms.CharField()
+    body =  forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Blog
+        fields = ['title','subtitle','description','body']
+        exclude = ['entryDate','author','imagen']
+

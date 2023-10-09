@@ -44,18 +44,11 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             form.save()
-            return render(
-                request,
-                "registrarme.html",
-                {
-                    "form": form,
-                    "mensaje": f"Te has registrado correctamente como: {username}",
-                },
-            )
-
-    else:
-        form = UserCreationForm()
-
+            return render(request,"registrarme.html",{"message": f"Te has registrado correctamente como: {username}"})
+        else:
+            return render(request,"registrarme.html",{"form": form,"error": "Los datos del formulario no son validos"})
+    
+    form = UserCreationForm()
     return render(request, "registrarme.html", {"form": form})
 
 

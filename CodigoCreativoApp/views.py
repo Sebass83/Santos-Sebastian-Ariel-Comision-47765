@@ -16,7 +16,7 @@ def inicio(request):
 
 
 @login_required(login_url="/accounts/login/")
-def crearBlog(request):
+def crearPost(request):
     avatar = Avatar.objects.filter(user=request.user.id)
 
     if request.method == "POST":
@@ -68,6 +68,54 @@ def crearBlog(request):
     return render(request, "crear-blog.html", {"forms": forms})
 
 
+@login_required(login_url="/accounts/login/")
+def editarPost(request, id):
+    postOriginal = Blog.objects.get(id=id)
+    avatar = Avatar.objects.filter(user=request.user.id)
+
+    if postOriginal.author == request.user:
+        if request.method == 'POST':
+            form = EditPost(request.POST)
+            if form.is_valid():
+                editedPost = form.cleaned_data
+                postOriginal.title = editedPost['title']
+                postOriginal.subtitle = editedPost['subtitle']
+                postOriginal.description = editedPost['description']
+                postOriginal.body = editedPost['body']
+                postOriginal.save()
+
+                data = Blog.objects.filter(author=request.user)
+                if data:
+                    if avatar:
+                        return render(request,"mis-post.html",{"data": data, "avatar": avatar[0].imagen.url,'message': 'Post editado y guardado con éxito'})
+                    return render(request, "mis-post.html", {"data": data, 'message': 'Post editado y guardado con éxito'})
+                else:
+                    if avatar:
+                        return render(request, "mis-post.html", {'message': 'Post editado y guardado con éxito', "avatar": avatar[0].imagen.url})
+                    return render(request, "mis-post.html", {'message': 'Post editado y guardado con éxito'})
+        form = EditPost(initial={'title':postOriginal.title, 'subtitle':postOriginal.subtitle, 'description':postOriginal.description, 'body':postOriginal.body})
+        if avatar:
+            return render(
+                request, "editar-blog.html", {"avatar": avatar[0].imagen.url, "forms": form,'id': id}
+        )
+        return render(request, "editar-blog.html", {"forms": form, 'id': id})
+    else:
+        data = Blog.objects.filter(author=request.user)
+        if data:
+            if avatar:
+                return render(request, "mis-post.html", {"data": data, "avatar": avatar[0].imagen.url})
+            return render(request, "mis-post.html", {"data": data, 'error': 'El post que quieres editar no te pertenece o no existe'})
+        else:
+            if avatar:
+                return render(request,"mis-post.html",{'error': 'El post que quieres editar no te pertenece o no existe', "avatar": avatar[0].imagen.url})
+            return render(request, "mis-post.html", {'error': 'El post que quieres editar no te pertenece o no existe'})
+        
+
+
+    
+
+
+
 def misPosts(request):
     data = Blog.objects.filter(author=request.user)
     avatar = Avatar.objects.filter(user=request.user.id)
@@ -86,9 +134,9 @@ def misPosts(request):
                 return render(
                     request,
                     "mis-post.html",
-                    {"Mensaje": "Sin post propios.", "avatar": avatar[0].imagen.url},
+                    {"error": "Sin post propios.", "avatar": avatar[0].imagen.url},
                 )
-            return render(request, "mis-post.html", {"Mensaje": "Sin post propios."})
+            return render(request, "mis-post.html", {"error": "Sin post propios."})
 
 
 def getPost(request, id):

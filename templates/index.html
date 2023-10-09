@@ -1,14 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block main %} 
-{% if error or message %}
-<div class="error-message">
-    {% if error %}
-      <div class="error">este es un error</div>
-    {% endif %}
-    {% if message %}
-      <div class="message">{{message}}</div>
-    {% endif %}
-</div>
-{% endif %}
+
 
 
 {% if data|length == 0 %}
