@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from CodigoCreativoApp.models import *
 from CodigoCreativoApp.forms import *
+import os
 
 
 # Create your views here.
@@ -131,5 +132,32 @@ def setAvatar(request):
     else:
         form=SetAvatar()
     return render(request,'set-avatar.html',{'forms':form})
+
+@login_required(login_url="/accounts/login/")
+def eliminarPost(request,id):
+    if request.method == 'GET':
+        try:
+            post = Blog.objects.get(id=id)
+        except Exception as e:
+            data = Blog.objects.filter(author=request.user)
+            if data:
+                return render(request, "mis-post.html", {"data": data, "error": "El post que intentas eliminar no existe"})
+            else:
+                return render(request, "mis-post.html", {"error": "Sin post propios. El post que intentas eliminar no existe"})
+
+        if post.author == request.user:
+            img = str(post.imagen.path)
+            if os.path.isfile(img):
+                os.remove(img)
+            
+            post.delete()
+            data = Blog.objects.filter(author=request.user)
+            return redirect('misPosts')
+        else:
+            if data:
+                return render(request, "mis-post.html", {"data": data, "error": "El post que intentas eliminar, no te pertenece."})
+            else:
+                return render(request, "mis-post.html", {"error": "Sin post propios. El post que intentas eliminar, no te pertenece."})
+
 
 

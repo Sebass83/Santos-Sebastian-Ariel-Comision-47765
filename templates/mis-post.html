@@ -11,7 +11,7 @@
     </div>
     <div class="action">
       <a href="{% url 'editarPost' id=post.id %}" class="primary">Editar</a>
-      <a href="" class="secondary">Eliminar</a>
+      <a href="javascript:void(0)" class="secondary" data-data={{post.id}}>Eliminar</a>
       <a href="{% url 'getPost' id=post.id %}" class="ver">Ver</a>
     </div>
   </div>
