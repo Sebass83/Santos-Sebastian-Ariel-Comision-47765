@@ -120,17 +120,29 @@ def allPosts(request):
 @login_required(login_url="/accounts/login/")
 def setAvatar(request):
     if request.method == "POST":
+
+        try:
+            if Avatar.objects.filter(user=request.user)[0]:
+                oldAvatar = Avatar.objects.filter(user=request.user)[0]
+                print({oldAvatar: oldAvatar})
+                if oldAvatar:
+                    img = str(oldAvatar.imagen.path)
+                    if os.path.isfile(img):
+                        os.remove(img)
+                    oldAvatar.delete()
+        except: 
+            pass  
+
+        
         form=SetAvatar(request.POST, request.FILES)
         if form.is_valid():
             usuario = request.user
             req = form.cleaned_data
             avatar = Avatar(user = usuario, imagen = req['imagen'])
             avatar.save()
-           
-            
-            return render(request,'index.html',{'message':f'Se asigno con éxito el avatar a {usuario}'})
-    else:
-        form=SetAvatar()
+            return redirect('inicio')
+    
+    form=SetAvatar()
     return render(request,'set-avatar.html',{'forms':form})
 
 @login_required(login_url="/accounts/login/")

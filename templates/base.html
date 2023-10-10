@@ -52,10 +52,14 @@
 
             {% with avatar=user.avatar_set.first %}
               {% if avatar %}
-                <img src="{{avatar.imagen.url}}" alt="" />
+              <a href="{% url 'setAvatar' %}">
+                <img class="editable" src="{{avatar.imagen.url}}" alt="" />
+              </a>
 
               {% else %}
+              <a href="{% url 'setAvatar' %}">
                 <img class="editable" src="{% static 'img/default-avatar.jpg' %}" alt="" />
+              </a>
               {% endif %}
             {% endwith %}
            
