@@ -31,4 +31,12 @@ class SetAvatar(forms.Form):
         fields = ['imagen']
         exclude = ['user']
 
+class SendMessageForm(forms.Form):
+    de =  forms.CharField(max_length=150)
+    para = forms.CharField(max_length=150)
+    asunto = forms.CharField(max_length=150)
+    body =  forms.CharField(widget=CKEditorWidget())
+
+    
+
 

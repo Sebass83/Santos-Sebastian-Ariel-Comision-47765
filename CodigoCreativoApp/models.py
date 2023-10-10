@@ -33,6 +33,8 @@ class Mensajes(models.Model):
     asunto = models.CharField(max_length=150)
     body =  RichTextField(default=None)
     leido = models.BooleanField(default=False)
+    visible = models.BooleanField(default=True)
+    spam = models.BooleanField(default=False)
 
     def __str__(self):
         return f'de: {self.de} - para: {self.para} - asunto: {self.asunto}'
