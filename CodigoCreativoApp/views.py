@@ -117,6 +117,30 @@ def allPosts(request):
 
     return render(request, "posts.html", {"data": data})
 
+def searchPost(request):
+    print(request)
+    
+    if request.method == 'POST' and request.POST['term']:
+        term = request.POST['term'].strip()
+        print(term)
+        if len(term) > 0:
+            results = Blog.objects.filter(body__icontains = term)
+            print({'results':results})
+            if results:
+                if len(results) > 1:
+                    return render(request, "posts.html", {"data": results, 'message': f'Se encontraron {len(results)} posts para la búsqueda: {term}'})
+                else:
+                    authorAvatar = Avatar.objects.filter(user= results[0].author.id)
+                    if authorAvatar:    
+                        return render(request, "post.html", {"data": results, 'authorAvatar': authorAvatar[0].imagen.url})
+                    return render(request, "post.html", {"data": results})
+        else:
+            return render(request, "index.html", {"message":f'No se encontró resultado para {term}'})
+    return redirect('inicio')
+
+
+    
+
 @login_required(login_url="/accounts/login/")
 def setAvatar(request):
     if request.method == "POST":

@@ -12,7 +12,7 @@ class CrearPost(forms.Form):
         model = Blog
         fields = ['title','subtitle','description','imagen','body']
         exclude = ['entryDate','author']
-
+ 
 class EditPost(forms.Form):
     title = forms.CharField()
     subtitle = forms.CharField()
@@ -39,6 +39,8 @@ class SendMessageForm(forms.Form):
         model = Mensajes
         fields = ['asunto', 'body']
         exclude = ['de','param'] 
+
+
 
     
 

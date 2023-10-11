@@ -178,6 +178,17 @@ p {
   font-weight: lighter;
   line-height: 1.6;
 }
+.search{
+  border: none;
+  background-color: var(--text-light);
+  border-radius: 10rem;
+  padding: .3rem .5rem;
+  margin-bottom: 1rem;
+}
+
+
+
+
 
 .material-symbols-outlined {
   width: 0;

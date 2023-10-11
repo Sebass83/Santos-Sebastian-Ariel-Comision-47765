@@ -13,6 +13,8 @@ urlpatterns = [
     path("editar-post/<int:id>", editarPost , name="editarPost"),
     #Eliminar
     path("eliminar-post/<int:id>", eliminarPost, name="eliminarPost"),
+    #Buscar
+    path("buscar-post/", searchPost, name="searchPost"),
 
     #Asignar Avatar
     path('set-avatar/', setAvatar, name="setAvatar"),

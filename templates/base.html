@@ -36,6 +36,7 @@
       <div><h1>{Código Creativo}</h1><span class="material-symbols-outlined">
         menu
       </span></div>
+      
       <div>
 
         <ul>
@@ -73,7 +74,10 @@
           {% endif %}
           
         </ul>
-
+        <form action="{% url 'searchPost' %}" method="POST">
+          {% csrf_token %}
+          <input class = 'search' type="text" name = 'term' minlength="4" placeholder="🔎 Buscar post">
+        </form>
       </div>
     </nav>
     <!-- NavBar -->
