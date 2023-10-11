@@ -1,5 +1,5 @@
 from django import forms
-from CodigoCreativoApp.models import Avatar, Blog
+from CodigoCreativoApp.models import Avatar, Blog, Mensajes
 from ckeditor.widgets import CKEditorWidget
 
 class CrearPost(forms.Form):
@@ -32,10 +32,13 @@ class SetAvatar(forms.Form):
         exclude = ['user']
 
 class SendMessageForm(forms.Form):
-    de =  forms.CharField(max_length=150)
-    para = forms.CharField(max_length=150)
+   
     asunto = forms.CharField(max_length=150)
     body =  forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Mensajes
+        fields = ['asunto', 'body']
+        exclude = ['de','param'] 
 
     
 

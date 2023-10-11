@@ -15,5 +15,8 @@ urlpatterns = [
     path("eliminar-post/<int:id>", eliminarPost, name="eliminarPost"),
 
     #Asignar Avatar
-    path('set-avatar/', setAvatar, name="setAvatar")
+    path('set-avatar/', setAvatar, name="setAvatar"),
+
+    #Enviar mensajes
+    path('enviar-mensaje/<str:destino>', sendMsj, name="sendMsj")
 ]

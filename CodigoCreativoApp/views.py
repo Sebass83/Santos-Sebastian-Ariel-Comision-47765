@@ -133,7 +133,6 @@ def setAvatar(request):
         except: 
             pass  
 
-        
         form=SetAvatar(request.POST, request.FILES)
         if form.is_valid():
             usuario = request.user
@@ -171,5 +170,33 @@ def eliminarPost(request,id):
             else:
                 return render(request, "mis-post.html", {"error": "Sin post propios. El post que intentas eliminar, no te pertenece."})
 
+@login_required(login_url="/accounts/login/")
+def inboxMsj(request):
+    try:
+        Mensajes.objects.filter(para=request.user.username)
+    except:
+        pass
+    pass
+    
+@login_required(login_url="/accounts/login/")
+def sendMsj(request, destino):
+    if request.method == 'POST':
+        form = SendMessageForm(request.POST)
+        if form.is_valid():
+            de = request.user.username
+            para = destino
+            asunto = form.cleaned_data['asunto']
+            body =  form.cleaned_data['body']
+            msj = Mensajes(de=de, para=para, asunto=asunto, body=body)
+            msj.save()
+            return render(request, 'enviar-mensaje.html',{'forms':form, 'message':'Mensaje enviado correctamente!','destino':destino})
+
+        else:
+            form = SendMessageForm()
+            return render(request, 'enviar-mensaje.html',{'forms':form, 'error':'Algo salió mal!','destino':destino})
+    form = SendMessageForm()
+    return render(request, 'enviar-mensaje.html',{'forms':form, 'destino':destino})
 
 
+def replyMsj(request, original):
+    pass

@@ -463,7 +463,7 @@ footer {
   border-left: 0.5rem solid var(--text-mid);
   padding: 0.5rem;
   margin-bottom: 1rem;
-  background-color: var(--text-light);
+  background-color: var(--text-dark)
 }
 .individual-post header p {
   width: auto;
@@ -474,12 +474,11 @@ footer {
   display: flex;
   align-items: center;
   font-size: small;
-  color: var(--text-mid);
+  color: var(--text-light);
 }
 .individual-post aside img {
 margin-right: .5rem;
 }
-
 
 .individual-post aside strong {
   gap: 1rem;

@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% load static %} {% block main %}
+<section class="container-form">
+    <form action="{% url 'sendMsj' destino=destino %}" method="post">
+        {% csrf_token %}
+        <h2>Enviar mensaje a: {{destino}}</h2>
+    
+        {{ forms.as_p }} {{ forms.media }}
+        <button type="submit">Enviar</button>
+      </form>
+</section>
+{% endblock %}

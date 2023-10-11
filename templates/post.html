@@ -12,7 +12,12 @@
     {% if authorAvatar %}
             <img src={{authorAvatar}} alt={{post.author.username}} width="30px" style="border-radius: 100%" />
     {% endif %}
-    <strong>Autor: </strong>{{post.author}} - <strong>Fecha de publicación: </strong>{{post.entryDate}}</aside>
+    <strong>Autor: </strong>
+    {{post.author}} - <strong>Fecha de publicación: </strong>{{post.entryDate}}
+    {% if user.is_authenticated %}
+      <a href="{% url 'sendMsj' destino=post.author %}" class="btn">✉ Contactar al autor</a>
+    {% endif %}
+</aside>
 </div>
 <p>{{post.description}}</p>
 </header>
