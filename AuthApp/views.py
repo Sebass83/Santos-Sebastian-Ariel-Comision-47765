@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
+from CodigoCreativoApp.forms import SetAvatar
 from CodigoCreativoApp.models import Avatar
-
-from AuthApp.form import UserEditForm
+from AuthApp.forms import UserEditForm
+import os
 
 
 # Create your views here.
@@ -57,8 +58,28 @@ def editarPerfil(request):
     usuario = request.user
 
     if request.method == "POST":
+        
         miFormulario = UserEditForm(request.POST)
+        try:
+            if Avatar.objects.filter(user=request.user)[0]:
+                oldAvatar = Avatar.objects.filter(user=request.user)[0]
+                print({oldAvatar: oldAvatar})
+                if oldAvatar:
+                    img = str(oldAvatar.imagen.path)
+                    if os.path.isfile(img):
+                        os.remove(img)
+                    oldAvatar.delete()
+        except: 
+            pass  
 
+        form=SetAvatar(request.POST, request.FILES)
+        if form.is_valid():
+            usuario = request.user
+            req = form.cleaned_data
+            avatar = Avatar(user = usuario, imagen = req['imagen'])
+            avatar.save()
+            return redirect('editarPerfil')
+    
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
             usuario.email = informacion["email"]
@@ -67,7 +88,8 @@ def editarPerfil(request):
             usuario.last_name = informacion["last_name"]
             usuario.first_name = informacion["first_name"]
             usuario.save()
-            return render(request, "logout.html")
+            return redirect('Logout')
     else:
+        form=SetAvatar()
         miFormulario = UserEditForm(initial={"email": usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
-    return render(request,"editarPerfil.html",{"miformulario": miFormulario, "usuario": usuario})
+    return render(request,"editarPerfil.html",{"miformulario": miFormulario, "usuario": usuario,'forms':form})

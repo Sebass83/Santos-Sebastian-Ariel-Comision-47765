@@ -56,12 +56,12 @@
             {% with avatar=user.avatar_set.first %}
               {% if avatar %}
               <a href="{% url 'setAvatar' %}">
-                <img class="editable" src="{{avatar.imagen.url}}" alt="" />
+                <img class="editable" src="{{avatar.imagen.url}}" alt="" style="aspect-ratio: 1/1;"/>
               </a>
 
               {% else %}
               <a href="{% url 'setAvatar' %}">
-                <img class="editable" src="{% static 'img/default-avatar.jpg' %}" alt="" />
+                <img class="editable" src="{% static 'img/default-avatar.jpg' %}" alt="" style="aspect-ratio: 1/1;"/>
               </a>
               {% endif %}
             {% endwith %}
