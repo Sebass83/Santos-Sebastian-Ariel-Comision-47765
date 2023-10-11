@@ -45,6 +45,8 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'crearBlog' %}">Crear post</a></li>
           <li><a href="{% url 'misPosts' %}">Mis Post</a></li>
+          <li><a href="{% url 'inboxMsj' %}">✉</a></li>
+          
           <li><a href="{% url 'Logout' %}">Salir</a></li>
           <li class="menu-usuario">
             <a href="{% url 'EditarPerfil' %}">⚙</a>

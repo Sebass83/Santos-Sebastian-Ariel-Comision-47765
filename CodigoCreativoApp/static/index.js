@@ -45,8 +45,8 @@ if (document.URL.includes("/mis-post/")) {
                 postId = parseInt(btn.dataset.data)
                 ruta = `/eliminar-post/${postId}`
                 let opcion = confirm(`Estas seguro de querer eliminar el post con ID: ${postId}`)
-                if(opcion){
-                    window.location.replace( document.location.origin+ruta)
+                if (opcion) {
+                    window.location.replace(document.location.origin + ruta)
                 }
 
             })
@@ -56,6 +56,29 @@ if (document.URL.includes("/mis-post/")) {
 
 }
 
+if (document.URL.includes("/mis-mensajes/")) {
+    const verBtns = document.querySelectorAll('.primary');
+
+    if (verBtns.length > 0) {
+        verBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault()
+                if (btn.innerHTML === "Leer") { 
+                temp = btn.parentNode
+                mensajes = temp.parentNode.children[2]
+
+                if (mensajes.classList.length == 2) {
+                    mensajes.classList.remove("mostrar")
+                    console.log(mensajes.classList)
+                } else {
+                    mensajes.classList.add("mostrar")
+                    console.log(mensajes.classList)
+                }}
+            })
+        })
+    }
+
+}
 
 
 

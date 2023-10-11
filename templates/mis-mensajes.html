@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% load static %} {% block main %} 
+
+{% if msj %}
+<h1>Mensajes:</h1>
+<div class="posts-list">
+  {% for mensaje in msj %}
+  {% if mensaje.visible %}
+  <div class="post-item">
+    <div class="resumen">
+        <h1>{{mensaje.de}}:</h1>
+        <h1>{{mensaje.asunto}}</h1>
+    </div>
+    <div class="action">
+      <a href="" class="primary">Leer</a>
+      
+    </div>
+    <div class="mi-mensaje">
+        <div class="data">
+            <p>Mensaje de: {{mensaje.de}}</p>
+            <p>Asunto: {{mensaje.asunto}}</p>
+        </div>
+        <hr>
+        <hr>
+        {{mensaje.body| safe | linebreaksbr}}
+        <footer>
+            <a href="{% url 'deleteMsj' id=mensaje.id %}" class="secondary" >Eliminar</a>
+            <a href="" class="primary">Responder</a>
+        </footer>
+      </div>
+  </div>
+  {% endif %}
+  
+  {% endfor %}
+</div>
+{% else %}
+<p>Sin post</p>
+{% endif %} {% endblock %}

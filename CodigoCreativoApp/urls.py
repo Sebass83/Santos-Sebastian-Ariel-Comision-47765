@@ -18,5 +18,10 @@ urlpatterns = [
     path('set-avatar/', setAvatar, name="setAvatar"),
 
     #Enviar mensajes
-    path('enviar-mensaje/<str:destino>', sendMsj, name="sendMsj")
+    path('enviar-mensaje/<str:destino>', sendMsj, name="sendMsj"),
+    #Ver mensaje
+    path('mis-mensajes/',inboxMsj, name="inboxMsj"),
+    #No lo elimina, lo pone no visible, esto para evitar malos entendidos, para eliminar los mensajes, se tiene que hacer desde el administrador.
+    path('eliminar-mensaje/<int:id>,',deleteMsj, name="deleteMsj"),
+
 ]

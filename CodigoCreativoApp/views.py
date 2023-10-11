@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+import os
 from CodigoCreativoApp.models import *
 from CodigoCreativoApp.forms import *
-import os
 
 
 # Create your views here.
@@ -172,11 +172,18 @@ def eliminarPost(request,id):
 
 @login_required(login_url="/accounts/login/")
 def inboxMsj(request):
-    try:
-        Mensajes.objects.filter(para=request.user.username)
-    except:
-        pass
-    pass
+    if request.method == 'GET':
+        msj = Mensajes.objects.filter(para=request.user.username)
+        spam = Mensajes.objects.filter(spam=True)
+        if msj and spam:
+             return render(request, 'mis-mensajes.html', {'msj': msj, 'spam': spam})
+        elif msj:
+            return render(request, 'mis-mensajes.html', {'msj': msj})
+        elif spam:
+            return render(request, 'mis-mensajes.html', {'spam': spam, 'message': 'No tiene mensajes para usted'})
+        else:
+            return render(request, 'mis-mensajes.html', {'message': 'No tienes mensajes'})
+
     
 @login_required(login_url="/accounts/login/")
 def sendMsj(request, destino):
@@ -197,6 +204,22 @@ def sendMsj(request, destino):
     form = SendMessageForm()
     return render(request, 'enviar-mensaje.html',{'forms':form, 'destino':destino})
 
-
-def replyMsj(request, original):
+@login_required(login_url="/accounts/login/")
+def replyMsj(request, id):
     pass
+    
+@login_required(login_url="/accounts/login/")
+def deleteMsj(request,id):
+    mensaje = Mensajes.objects.get(id=id)
+    if mensaje.para == request.user.username:
+        mensaje.delete()
+        return redirect('inboxMsj')
+    
+
+
+    
+
+    
+
+
+        

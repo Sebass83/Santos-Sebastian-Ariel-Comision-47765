@@ -458,7 +458,8 @@ footer {
   font-weight: bolder;
   margin-bottom: 1rem;
 }
-.individual-post header .data {
+.data {
+  color: var(--text-light);
  
   border-left: 0.5rem solid var(--text-mid);
   padding: 0.5rem;
@@ -555,7 +556,8 @@ margin-right: .5rem;
   width: 99vw;
   background-color: var(--text-dark);
   gap:1rem;
-  height: calc(100vh - 5.2rem);
+  min-height: calc(100vh - 5.2rem);
+
 }
 .post-item {
   width: 99vw;
@@ -594,6 +596,7 @@ margin-right: .5rem;
   padding: 0.5rem 1rem;
   border-radius:var(--br);
   border: 3px solid var(--green-light);
+  text-decoration: none;
   transition: var(--transition);
 
 }
@@ -604,13 +607,24 @@ margin-right: .5rem;
   border-radius:var(--br);
   border: 3px solid var(--red-light);
   transition: var(--transition);
+  text-decoration: none;
 }
 .ver{
   background-color: var(--blue-dark);
   color: var(--blue-light);
+  text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius:var(--br);
   border: 3px solid var(--blue-light);
+  transition: var(--transition);
+}
+
+.spam{
+  background-color: var(--red-dark);
+  color: var(--red-light);
+  padding: 0.5rem 1rem;
+  border-radius:var(--br);
+  border: 3px solid var(--red-light);
   transition: var(--transition);
 }
 
@@ -635,6 +649,37 @@ margin-right: .5rem;
   padding: 0.5rem 1rem;
   border-radius:var(--br);
   border: 3px solid var(--blue-dark);
+}
+.spam:hover{
+  background-color: var(--red-light);
+  color: var(--red-dark);
+  padding: 0.5rem 1rem;
+  border-radius:var(--br);
+  border: 3px solid var(--red-dark);
+  transition: var(--transition);
+}
+
+.mi-mensaje{
+  display: none;
+  width: 100%;
+  background-color: var(--text-light);
+  padding: 1rem;
+
+}
+.mi-mensaje footer{
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  background-color: var(--text-dark);
+  margin-top: 1rem;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+
+.mostrar{
+  display: flex;
+  flex-direction: column;
 }
 
 
