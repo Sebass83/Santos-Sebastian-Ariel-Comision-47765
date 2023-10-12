@@ -380,6 +380,7 @@ footer {
 }
 
 .container-form {
+  gap: 1rem;
   padding: 1rem;
   box-sizing: border-box;
   width: 99vw;

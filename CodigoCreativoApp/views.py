@@ -13,7 +13,6 @@ def inicio(request):
 
 @login_required(login_url="/accounts/login/")
 def crearPost(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
 
     if request.method == "POST":
         forms = CrearPost(request.POST, request.FILES)
@@ -38,7 +37,6 @@ def crearPost(request):
             post.save()
 
             data = Blog.objects.all().order_by("-entryDate")
-            avatar = Avatar.objects.filter(user=request.user.id)
        
             return render(
                 request,
@@ -59,6 +57,7 @@ def editarPost(request, id):
         if request.method == 'POST':
             form = EditPost(request.POST)
             if form.is_valid():
+                
                 editedPost = form.cleaned_data
                 postOriginal.title = editedPost['title']
                 postOriginal.subtitle = editedPost['subtitle']
@@ -80,11 +79,6 @@ def editarPost(request, id):
         else:
             return render(request, "mis-post.html", {'error': 'El post que quieres editar no te pertenece o no existe'})
         
-
-
-    
-
-
 
 def misPosts(request):
     data = Blog.objects.filter(author=request.user)
@@ -114,15 +108,11 @@ def getPost(request, id):
 
 def allPosts(request):
     data = Blog.objects.all()
-
     return render(request, "posts.html", {"data": data})
 
-def searchPost(request):
-    print(request)
-    
+def searchPost(request):  
     if request.method == 'POST' and request.POST['term']:
         term = request.POST['term'].strip()
-        print(term)
         if len(term) > 0:
             results = Blog.objects.filter(body__icontains = term)
             print({'results':results})
@@ -139,6 +129,15 @@ def searchPost(request):
     return redirect('inicio')
 
 
+
+
+def getPerfil(request,user):
+    usuario = User.objects.get(id = user)
+    userAvatar = Avatar.objects.filter(user__exact= user)[0]
+    urls = PerfilURLS.objects.filter(usuario__exact=user).last()
+
+    return render(request, 'perfil.html',{'usuario':usuario or None,'userAvatar':userAvatar or None,'urls':urls or None})
+         
     
 
 @login_required(login_url="/accounts/login/")

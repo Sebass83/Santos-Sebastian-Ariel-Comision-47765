@@ -26,7 +26,7 @@
   <div class="nota-principal-contenido">
     <h2>{{post.title}}</h2>
     <h3>{{post.subtitle}}</h3>
-    <span>Autor: {{post.author}} - Fecha: {{post.entryDate}}</span>
+    <span>Autor: <a href="{% url 'getPerfil' user=post.author.id %}" class="btn">{{post.author}}</a> - Fecha: {{post.entryDate}}</span>
     <p>{{post.description}}</p>
     <footer>
       <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>
@@ -34,6 +34,8 @@
       <a href="{% url 'sendMsj' destino=post.author %}" class="btn">✉ Contactar al autor</a>
       {% endif %}
     </footer>
+    
+    
   </div>
 </section>
 

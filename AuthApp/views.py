@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
-from CodigoCreativoApp.forms import SetAvatar
-from CodigoCreativoApp.models import Avatar
+from CodigoCreativoApp.forms import SetAvatar, SetPerfilURLS
+from CodigoCreativoApp.models import Avatar, PerfilURLS
 from AuthApp.forms import UserEditForm
 import os
 
@@ -51,13 +51,44 @@ def register(request):
     
     form = UserCreationForm()
     return render(request, "registrarme.html", {"form": form})
-
+         
 
 @login_required
 def editarPerfil(request):
     usuario = request.user
+    try:
+        url = PerfilURLS.objects.filter(usuario=request.user)
+     
+    except:
+        url = False
+
 
     if request.method == "POST":
+
+        urlForm = SetPerfilURLS(request.POST)
+        aEliminar = PerfilURLS.objects.filter(usuario__exact=request.user).last()
+        
+        if urlForm.is_valid():
+            req = urlForm.cleaned_data
+            if len(req) > 0:
+                usuario = request.user
+                if req['url_github']:
+                    url_github = req['url_github']
+                else:
+                    url_github = ''
+                if req['url_linkedin']:
+                    url_linkedin = req['url_linkedin']
+                else:
+                    url_linkedin=''
+                if req['url_personal']:
+                    url_personal = req['url_personal']
+                else:
+                    url_personal=''
+                urlsPerfil = PerfilURLS(usuario = usuario ,url_github = url_github ,url_linkedin = url_linkedin,url_personal = url_personal )
+                if aEliminar:
+                    aEliminar.delete()
+                urlsPerfil.save()
+                return redirect('EditarPerfil')
         
         miFormulario = UserEditForm(request.POST)
         try:
@@ -78,7 +109,7 @@ def editarPerfil(request):
             req = form.cleaned_data
             avatar = Avatar(user = usuario, imagen = req['imagen'])
             avatar.save()
-            return redirect('editarPerfil')
+            return redirect('EditarPerfil')
     
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
@@ -90,6 +121,14 @@ def editarPerfil(request):
             usuario.save()
             return redirect('Logout')
     else:
-        form=SetAvatar()
-        miFormulario = UserEditForm(initial={"email": usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
-    return render(request,"editarPerfil.html",{"miformulario": miFormulario, "usuario": usuario,'forms':form})
+        print(url)
+        if url:
+            form=SetAvatar()
+            miFormulario = UserEditForm(initial={"email": usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
+            urlForm = SetPerfilURLS(initial={'url_github' : url[0].url_github, 'url_linkedin':url[0].url_linkedin, 'url_personal':url[0].url_personal})
+        else:
+            form=SetAvatar()
+            miFormulario = UserEditForm(initial={"email": usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
+            urlForm = SetPerfilURLS()
+
+    return render(request,"editarPerfil.html",{"miformulario": miFormulario, "usuario": usuario,'forms':form, 'urlForm':urlForm} )

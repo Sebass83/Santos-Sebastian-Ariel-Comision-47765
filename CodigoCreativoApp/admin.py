@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(Avatar)
 admin.site.register(Blog)
 admin.site.register(Mensajes)
-
+admin.site.register(PerfilURLS)
 
 
 

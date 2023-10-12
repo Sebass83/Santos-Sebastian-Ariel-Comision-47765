@@ -35,6 +35,13 @@ class Mensajes(models.Model):
 
     def __str__(self):
         return f'de: {self.de} - para: {self.para} - asunto: {self.asunto}'
+    
+class PerfilURLS(models.Model):
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE) 
+    url_github = models.URLField(blank=True)
+    url_linkedin= models.URLField(blank=True)
+    url_personal= models.URLField(blank=True)
+
 
     
 

@@ -26,4 +26,9 @@ urlpatterns = [
     #No lo elimina, lo pone no visible, esto para evitar malos entendidos, para eliminar los mensajes, se tiene que hacer desde el administrador.
     path('eliminar-mensaje/<int:id>,',deleteMsj, name="deleteMsj"),
 
+    #Ver perfil
+    path('perfil/<int:user>',getPerfil, name="getPerfil")
+
+
+
 ]

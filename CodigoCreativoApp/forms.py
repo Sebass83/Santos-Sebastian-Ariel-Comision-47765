@@ -1,5 +1,5 @@
 from django import forms
-from CodigoCreativoApp.models import Avatar, Blog, Mensajes
+from CodigoCreativoApp.models import Avatar, Blog, Mensajes, PerfilURLS
 from ckeditor.widgets import CKEditorWidget
 
 class CrearPost(forms.Form):
@@ -39,6 +39,15 @@ class SendMessageForm(forms.Form):
         model = Mensajes
         fields = ['asunto', 'body']
         exclude = ['de','param'] 
+
+class SetPerfilURLS(forms.Form):
+    url_github = forms.URLField(required=False)
+    url_linkedin= forms.URLField(required=False)
+    url_personal= forms.URLField(required=False)
+    class Meta:
+        model = PerfilURLS
+        fields = ['url_github', 'url_linkedin', 'url_personal']
+
 
 
 

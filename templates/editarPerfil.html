@@ -2,7 +2,6 @@
 <section class="container-form">
   <form action="{% url 'setAvatar' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <h2>Asignar Avatar</h2>
     {% with avatar=user.avatar_set.first %}
       {% if avatar %}
         <img src="{{avatar.imagen.url}}" alt="{{user.username}}" width="50%" style="border-radius:100%;aspect-ratio: 1/1;align-self: center;"/>
@@ -14,12 +13,16 @@
     {{ forms.as_p }} 
     <button type="submit">Asignar Avatar</button>
   </form>
-</section>
-<section class="container-form">
+
   <form action="" method="POST">
     {% csrf_token %}
-    <h2>Editar perfil:</h2>
       {{ miformulario.as_p }}
+    <button type="submit">Enviar!</button>
+  </form>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+      {{ urlForm.as_p }}
     <button type="submit">Enviar!</button>
   </form>
 </section>

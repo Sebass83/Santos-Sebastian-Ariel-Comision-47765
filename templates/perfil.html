@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% load static %} {% block main %} 
+<section class="container-form">
+    {% if  userAvatar %}
+    <img src="{{userAvatar.imagen.url}}" alt="{{usuario}}" width="320px" style="border-radius: 100%;aspect-ratio: 1/1; object-fit: cover; align-self: center; justify-self: center;">
+    {% endif %}
+    <h2 style="align-self: center; justify-self: center; color: var(--text-light);">{{usuario}}</h2>
+    <div>
+      
+        {{ urls.url_github }}
+        {{ urls.url_linkedin }}
+        {{ urls.url_personal }}
+        
+    </div>
+
+
+</section>
+
+{% endblock %}
