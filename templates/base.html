@@ -41,7 +41,7 @@
 
         <ul>
           <li><a href="{% url 'inicio' %}">inicio</a></li>
-          <li><a href="">Acerca de mi</a></li>
+          <li><a href="{% url 'sobreMi' %}">Sobre Mi</a></li>
           <li><a href="{% url 'allPosts' %}">Blogs</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'crearBlog' %}">Crear post</a></li>

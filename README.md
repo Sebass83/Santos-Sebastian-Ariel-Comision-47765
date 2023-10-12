@@ -29,5 +29,24 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-##
+## Nombre del Proyecto: {Código Creativo}
 
+El proyecto es una red social en la cual los usuarios pueden compartir sus publicaciones y comunicarse entre ellos.
+
+Los usuarios pueden crear, editar eliminar (editar y eliminar, solo lo puede hacer el propietario del post)sus post y contactar a otros usuarios.
+Cada usuario puede enviar, recibir y eliminar y/o responder a los mensajes.
+Asimismo, cada usuario podrá gestionar su perfil
+
+
+
+Usuario de prueba:
+JuanCaDev
+password:
+Carlos1983
+
+Super user: 
+admin
+password:
+admin
+
+Link al video https://youtu.be/xgAW8Qbr8Nk

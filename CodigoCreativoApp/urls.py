@@ -29,8 +29,9 @@ urlpatterns = [
     path('eliminar-mensaje/<int:id>,',deleteMsj, name="deleteMsj"),
 
     #Ver perfil
-    path('perfil/<int:user>',getPerfil, name="getPerfil")
+    path('perfil/<int:user>',getPerfil, name="getPerfil"),
 
-
+    # Sobre mi
+    path('sobre-mi/', sobreMi , name="sobreMi"),
 
 ]
