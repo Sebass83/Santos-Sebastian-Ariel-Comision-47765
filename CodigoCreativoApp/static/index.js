@@ -62,8 +62,9 @@ if (document.URL.includes("/mis-mensajes/")) {
     if (verBtns.length > 0) {
         verBtns.forEach(btn => {
             btn.addEventListener("click", (e) => {
-                e.preventDefault()
-                if (btn.innerHTML === "Leer") { 
+                
+                if (btn.innerHTML === "Leer") {
+                e.preventDefault() 
                 temp = btn.parentNode
                 mensajes = temp.parentNode.children[2]
 

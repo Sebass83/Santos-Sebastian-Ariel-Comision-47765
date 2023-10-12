@@ -21,6 +21,8 @@ urlpatterns = [
 
     #Enviar mensajes
     path('enviar-mensaje/<str:destino>', sendMsj, name="sendMsj"),
+    #Enviar mensajes respoderA, asunto
+    path('reponder-mensaje/<str:respoderA>/<str:asunto>', replyMsj, name="replyMsj"),
     #Ver mensaje
     path('mis-mensajes/',inboxMsj, name="inboxMsj"),
     #No lo elimina, lo pone no visible, esto para evitar malos entendidos, para eliminar los mensajes, se tiene que hacer desde el administrador.

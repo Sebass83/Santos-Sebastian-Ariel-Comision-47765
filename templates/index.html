@@ -45,7 +45,7 @@
   <div class="card">
     <img src="{{post.imagen.url}}" alt="" />
     <h2>{{post.title}}</h2>
-    <span>Autor: {{post.author}} - Fecha: {{post.entryDate}}</span>
+    <span>Autor: <a href="{% url 'getPerfil' user=post.author.id %}" class="btn">{{post.author}}</a> - Fecha: {{post.entryDate}}</span>
     <p>{{post.description}}</p>
     <footer>
       <a href="{% url 'getPost' id=post.id %}" class="btn">Leer mas</a>

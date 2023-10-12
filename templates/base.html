@@ -51,7 +51,7 @@
           <li><a href="{% url 'Logout' %}">Salir</a></li>
           <li class="menu-usuario">
             <a href="{% url 'EditarPerfil' %}">⚙</a>
-            <div>{{user.username}}</div>
+            <div><a href="{% url 'getPerfil' user=user.id %}" >{{user.username}}</a></div>
 
             {% with avatar=user.avatar_set.first %}
               {% if avatar %}

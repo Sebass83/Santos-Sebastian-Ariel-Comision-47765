@@ -197,13 +197,8 @@ def eliminarPost(request,id):
 def inboxMsj(request):
     if request.method == 'GET':
         msj = Mensajes.objects.filter(para=request.user.username)
-        spam = Mensajes.objects.filter(spam=True)
-        if msj and spam:
-             return render(request, 'mis-mensajes.html', {'msj': msj, 'spam': spam})
-        elif msj:
+        if msj:
             return render(request, 'mis-mensajes.html', {'msj': msj})
-        elif spam:
-            return render(request, 'mis-mensajes.html', {'spam': spam, 'message': 'No tiene mensajes para usted'})
         else:
             return render(request, 'mis-mensajes.html', {'message': 'No tienes mensajes'})
 
@@ -228,8 +223,23 @@ def sendMsj(request, destino):
     return render(request, 'enviar-mensaje.html',{'forms':form, 'destino':destino})
 
 @login_required(login_url="/accounts/login/")
-def replyMsj(request, id):
-    pass
+def replyMsj(request, respoderA, asunto):
+    enRespuesta = f'En respuesta a: {asunto}'
+    if request.method == 'POST':
+        form = SendMessageForm(request.POST)
+        if form.is_valid():
+            de = request.user.username
+            para = respoderA
+            asunto = form.cleaned_data['asunto']
+            body =  form.cleaned_data['body']
+            msj = Mensajes(de=de, para=para, asunto=asunto, body=body)
+            msj.save()
+            return render(request, 'responder-mensaje.html',{'forms':form, 'message':'Mensaje enviado correctamente!','respoderA': respoderA,'asunto': asunto})
+        else:
+            form = SendMessageForm(initial={'para':respoderA,'asunto':enRespuesta})
+            return render(request, 'responder-mensaje.html',{'forms':form, 'error':'Algo salió mal!', 'respoderA': respoderA,'asunto': asunto})
+    form = SendMessageForm(initial={'para':respoderA,'asunto':enRespuesta})
+    return render(request, 'responder-mensaje.html',{'forms':form,'respoderA': respoderA,'asunto': asunto})
     
 @login_required(login_url="/accounts/login/")
 def deleteMsj(request,id):

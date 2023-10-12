@@ -4,7 +4,7 @@
 <h1>Mensajes:</h1>
 <div class="posts-list">
   {% for mensaje in msj %}
-  {% if mensaje.visible %}
+ 
   <div class="post-item">
     <div class="resumen">
         <h1>{{mensaje.de}}:</h1>
@@ -24,14 +24,16 @@
         {{mensaje.body| safe | linebreaksbr}}
         <footer>
             <a href="{% url 'deleteMsj' id=mensaje.id %}" class="secondary" >Eliminar</a>
-            <a href="" class="primary">Responder</a>
+            <a href="{% url 'replyMsj'  respoderA=mensaje.de  asunto=mensaje.asunto %}" class="primary">Responder</a>
         </footer>
       </div>
   </div>
-  {% endif %}
+
   
   {% endfor %}
 </div>
 {% else %}
-<p>Sin post</p>
+<section class="container-form">
+  <h1 style="color: var(--text-light);">Sin mensajes</h1>
+</section>
 {% endif %} {% endblock %}
