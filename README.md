@@ -35,9 +35,7 @@ El proyecto es una red social en la cual los usuarios pueden compartir sus publi
 
 Los usuarios pueden crear, editar eliminar (editar y eliminar, solo lo puede hacer el propietario del post)sus post y contactar a otros usuarios.
 Cada usuario puede enviar, recibir y eliminar y/o responder a los mensajes.
-Asimismo, cada usuario podrá gestionar su perfil
-
-
+Asimismo, cada usuario podrá gestionar su perfil.
 
 Usuario de prueba:
 JuanCaDev
