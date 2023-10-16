@@ -69,10 +69,13 @@ def searchPost(request):
 
 def getPerfil(request,user):
     usuario = User.objects.get(id = user)
-    userAvatar = Avatar.objects.filter(user__exact= user)[0]
+    try:
+        userAvatar = Avatar.objects.filter(user__exact= user)[0]
+    except:
+        userAvatar = ''
     urls = PerfilURLS.objects.filter(usuario__exact=user).last()
 
-    return render(request, 'perfil.html',{'usuario':usuario or None,'userAvatar':userAvatar or None,'urls':urls or None})
+    return render(request, 'perfil.html',{'usuario':usuario or None,'userAvatar':userAvatar or '','urls':urls or None})
 
 @login_required(login_url="/accounts/login/")
 def eliminarPost(request,id):

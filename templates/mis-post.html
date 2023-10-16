@@ -1,7 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block main %} 
-
-
-{% if data %}
+{% extends "base.html" %} {% load static %} {% block main %} {% if data %}
 <div class="posts-list">
   {% for post in data %}
   <div class="post-item">
@@ -11,12 +8,20 @@
     </div>
     <div class="action">
       <a href="{% url 'editarPost' id=post.id %}" class="primary">Editar</a>
-      <a href="javascript:void(0)" class="secondary" data-data={{post.id}}>Eliminar</a>
+      <a href="javascript:void(0)" class="secondary" data-data="{{post.id}}"
+        >Eliminar</a
+      >
       <a href="{% url 'getPost' id=post.id %}" class="ver">Ver</a>
     </div>
   </div>
   {% endfor %}
 </div>
 {% else %}
-<p>Sin post</p>
+<section class="container-form">
+    <h2 style="color: aliceblue" >Sin post</h2>
+    <a href="{% url 'crearBlog' %}" class="btn" style="justify-self: center; margin-top: 2rem;"
+      >Crear Post</a>
+  
+</section>
+
 {% endif %} {% endblock %}

@@ -15,7 +15,11 @@
         <a href="{{urls.url_linkedin}}"><img src="{% static 'img/linkedin.png' %}" alt="{{urls.url_linkedin}}" width="100px"></a>
         {% endif %}
         {% if urls.url_personal %}
+        {% if userAvatar.imagen.url %}
         <a href="{{urls.url_personal}}"><img src="{{userAvatar.imagen.url}}" alt="{{urls.url_personal}}" width="100px" style="border-radius: 100%;aspect-ratio: 1/1; object-fit: cover;"></a>
+        {% else %}
+        <a href="{{urls.url_personal}}"><img src="{% static 'img/default-avatar.jpg' %}" alt="{{urls.url_personal}}" width="100px" style="border-radius: 100%;aspect-ratio: 1/1; object-fit: cover;"></a>
+        {% endif %}
         {% endif %}
         
     </div>
